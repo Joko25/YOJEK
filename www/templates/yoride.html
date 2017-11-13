@@ -1,0 +1,19 @@
+<ion-view view-title="Yoride">
+  <ion-content>
+  	<div class="controls" id="search">
+	  	<input id="pac-input" type="text" placeholder="Dari">
+	  	<input id="tuj-input" type="text" placeholder="Tujuan"> <!-- class="controls" -->
+  	</div>
+    <div id="map" data-tap-disabled="true"></div>
+  </ion-content>
+  <div class="bar bar-footer bar-stable" style="height: 10%">
+  	<div class="row">
+	  	<div class="col col-60">
+	  		<span id="tarif">Tarif : {{tarif}}</span>
+	  	</div>
+	  	<div align="center" class="col col-40 bar-stable">
+        <button class="button button-full button-energized">ORDER</button>
+	  	</div>
+  	</div>
+  </div>
+</ion-view>

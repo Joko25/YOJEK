@@ -1,7 +1,4 @@
-angular.module('starter.controllers', [])
-
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-
+app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $window, $state, UserService, $ionicActionSheet, $ionicLoading) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -25,8 +22,38 @@ angular.module('starter.controllers', [])
   };
 
   // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
+  $scope.logout = function() {
+
+    var hideSheet = $ionicActionSheet.show({
+      destructiveText: 'Logout',
+      titleText: 'Are you sure you want to logout? This app is awsome so I recommend you to stay.',
+      cancelText: 'Cancel',
+      cancel: function() {},
+      buttonClicked: function(index) {
+        return true;
+      },
+      destructiveButtonClicked: function(){
+        $ionicLoading.show({
+          template: 'Logging out...'
+        });
+
+         $window.localStorage.setItem("log", "false");
+         $state.go("home");
+         $window.location.reload(true);
+        
+        // Google logout
+        window.plugins.googleplus.logout(
+          function (msg) {
+            console.log(msg);
+            $ionicLoading.hide();
+            $state.go('login');
+          },
+          function(fail){
+            console.log(fail);
+          }
+        );
+      }
+    });
   };
 
   // Perform the login action when the user submits the login form
@@ -39,9 +66,9 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
-})
+});
 
-.controller('PlaylistsCtrl', function($scope) {
+app.controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
     { title: 'Chill', id: 2 },
@@ -50,7 +77,44 @@ angular.module('starter.controllers', [])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
-})
+});
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+app.controller('homeCtrl', function($scope, $state, $stateParams, $ionicSlideBoxDelegate) {
+  $scope.options = {
+    loop: false,
+    effect: 'fade',
+    speed: 500,
+    autoplay:3500
+  };
+
+  $scope.face = 'img/lg.png';
+  $scope.face2 = 'img/lg2.png';
+
+  $scope.$on("$ionicSlides.sliderInitialized", function(event, data){
+  // data.slider is the instance of Swiper
+    $scope.slider = data.slider;
+  });
+
+  $scope.$on("$ionicSlides.slideChangeStart", function(event, data){
+    console.log('Slide change is beginning');
+  });
+
+  $scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
+    // note: the indexes are 0-based
+    $scope.activeIndex = data.slider.activeIndex;
+    $scope.previousIndex = data.slider.previousIndex;
+  });
+
+  $scope.nextSlide = function() {
+    $ionicSlideBoxDelegate.next();
+  }
+
+  $scope.login = function(){
+      $state.go("login");
+  }
+
+  $scope.regist = function(){
+      $state.go("reg");
+  }
+
 });
