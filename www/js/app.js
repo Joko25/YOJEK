@@ -21,3 +21,9 @@ app.run(function($ionicPlatform) {
     }
   });
 });
+
+app.config(function($ionicConfigProvider) {
+
+  // note that you can also chain configs
+  $ionicConfigProvider.navBar.alignTitle('center');
+});

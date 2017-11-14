@@ -8,6 +8,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $window, $stat
 
   // Form data for the login modal
   $scope.loginData = {};
+  
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -79,42 +80,53 @@ app.controller('PlaylistsCtrl', function($scope) {
   ];
 });
 
-app.controller('homeCtrl', function($scope, $state, $stateParams, $ionicSlideBoxDelegate) {
-  $scope.options = {
-    loop: false,
-    effect: 'fade',
-    speed: 500,
-    autoplay:3500
-  };
+app.controller('homeCtrl', function($scope, $state, $window, $stateParams, $ionicSlideBoxDelegate) {
+  var log = $window.localStorage.getItem("log");
+  if(log == "true"){
+    $state.go("app.dash");
+    console.log("LOGGED");
+  }else{
+    $scope.options = {
+      loop: false,
+      effect: 'fade',
+      speed: 500,
+      autoplay:3500
+    };
 
-  $scope.face = 'img/lg.png';
-  $scope.face2 = 'img/lg2.png';
 
-  $scope.$on("$ionicSlides.sliderInitialized", function(event, data){
-  // data.slider is the instance of Swiper
-    $scope.slider = data.slider;
-  });
+    console.log(log);
 
-  $scope.$on("$ionicSlides.slideChangeStart", function(event, data){
-    console.log('Slide change is beginning');
-  });
 
-  $scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
-    // note: the indexes are 0-based
-    $scope.activeIndex = data.slider.activeIndex;
-    $scope.previousIndex = data.slider.previousIndex;
-  });
+    $scope.face = 'img/lg.png';
+    $scope.face2 = 'img/lg2.png';
 
-  $scope.nextSlide = function() {
-    $ionicSlideBoxDelegate.next();
-  }
+    $scope.$on("$ionicSlides.sliderInitialized", function(event, data){
+    // data.slider is the instance of Swiper
+      $scope.slider = data.slider;
+    });
 
-  $scope.login = function(){
-      $state.go("login");
-  }
+    $scope.$on("$ionicSlides.slideChangeStart", function(event, data){
+      console.log('Slide change is beginning');
+    });
 
-  $scope.regist = function(){
-      $state.go("reg");
+    $scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
+      // note: the indexes are 0-based
+      $scope.activeIndex = data.slider.activeIndex;
+      $scope.previousIndex = data.slider.previousIndex;
+    });
+
+    $scope.nextSlide = function() {
+      $ionicSlideBoxDelegate.next();
+    }
+
+    $scope.login = function(){
+        $state.go("login");
+    }
+
+    $scope.regist = function(){
+        $state.go("reg");
+    }
+    
   }
 
 });

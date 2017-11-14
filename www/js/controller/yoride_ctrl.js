@@ -1,6 +1,10 @@
 app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation) {
  var options = {timeout: 10000, enableHighAccuracy: true};
  $scope.tarif = 'Rp. 0';
+
+ $scope.goBack = function(){
+  $state.go('app.dash');
+ };
  
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
  

@@ -21,6 +21,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     
   })
 
+  .state('yoride', {
+    url: '/yoride',
+    templateUrl: 'templates/yoride.html',
+    controller: 'yorideCtrl'
+    
+  })
+
     .state('reg', {
     url: '/reg',
     templateUrl: 'templates/reg.html',
