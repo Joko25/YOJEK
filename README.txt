@@ -15,8 +15,8 @@ https://ionicthemes.com/tutorials/about/google-plus-login-with-ionic-framework
 https://www.npmjs.com/package/cordova-plugin-googleplus
 https://stackoverflow.com/questions/34812616/could-not-find-any-version-that-matches-com-google-android-gmsplay-services-plu
 
-
-
+????????•???????¤?
+?NMXc,7XXM
 
 https://www.pubnub.com/tutorials/javascript/mapping-javascript-tracking/
 
@@ -27,11 +27,14 @@ https://developers.google.com/maps/documentation/javascript/examples/directions-
 
 https://www.joshmorony.com/category/ionic-tutorials/page/10/
 
+##FIREBASE
 https://console.firebase.google.com/u/0/?pli=1
 https://www.airpair.com/angularjs/posts/build-a-real-time-hybrid-app-with-ionic-firebase
 https://github.com/firebase/angularfire
 https://firebase.google.com/docs/web/setup?authuser=0
+https://firebase.googleblog.com/2016/01/social-login-with-ionic_77.html
 https://loading.io/
+https://www.tutorialspoint.com/firebase/firebase_event_types.htm
 
 https://devdactic.com/ionic-push-notifications-guide/
 http://ngcordova.com/docs/plugins/pushNotifications/

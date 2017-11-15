@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function($scope, $state, $http, $ionicPopup, $ionicLoading, $window, $ionicLoading, UserService) {
+app.controller('loginCtrl', function($scope, $state, $http, $ionicPopup, Firebase, $ionicLoading, md5, $window, $ionicLoading, UserService) {
   $scope.data = {};
   $scope.face = 'img/icon.png';
 
@@ -16,23 +16,46 @@ app.controller('loginCtrl', function($scope, $state, $http, $ionicPopup, $ionicL
     }).then(function(){
        //console.log("The loading indicator is now displayed");
     });
+    var username = $scope.data.username;
+    var password = $scope.data.password;
 
-
-
-    var userLog = $window.localStorage.getItem("username");
-    var passLog = $window.localStorage.getItem("password");
-    console.log("LOGIN user: " + userLog + " - PW: " + passLog);
-    if ($scope.data.username == userLog && $scope.data.password == passLog && $scope.data.username !=='' && $scope.data.password !=='') {
+    if (username==null || password==null) {
       $ionicLoading.hide();
-      $state.go("app.dash");
-      $window.localStorage.setItem("log", "true");
-    }else{
       var alertPopup = $ionicPopup.alert({
-          title: 'Login error!',
-          template: "Username or password is wrong"
+            title: 'Login error!',
+            template: "Username or password is undifined"
       });
-      $ionicLoading.hide();
+    }else{
+
+      console.log(md5.createHash(password));
+      var usersRef = firebase.database().ref('users/'+username);
+      // usersRef.orderByChild("password").equalTo(md5.createHash(password)).on("child_added", function(data) {
+      //    console.log("Equal to filter: " + data.val().password);
+      // });
+
+      usersRef.on("value", function(snapshot){
+       console.log(snapshot.val().password);
+
+        if (snapshot.val().password == md5.createHash(password)) {
+          $ionicLoading.hide();
+          $state.go("app.dash");
+          $window.localStorage.setItem("log", "true");
+        }else{
+          var alertPopup = $ionicPopup.alert({
+            title: 'Login error!',
+            template: "Username or password is wrong"
+          });
+          $ionicLoading.hide();
+        }
+      }, function(error){
+        console.log("Error: "+error.code);
+      })
+
+      var userLog = $window.localStorage.getItem("username");
+      var passLog = $window.localStorage.getItem("password");
+      //console.log("LOGIN user: " + userLog + " - PW: " + passLog);
     }
+
     // $state.go("reg");
   }
 
@@ -74,7 +97,7 @@ app.controller('loginCtrl', function($scope, $state, $http, $ionicPopup, $ionicL
 });
 
 
-app.controller('RegCtrl', function($scope, $ionicHistory, $window, $ionicPopup, $state, $http, $ionicLoading) {
+app.controller('RegCtrl', function($scope, $ionicHistory, $window, $ionicPopup, Firebase, $state, $http, $ionicLoading,md5) {
   $scope.goBack = function(){
     // $ionicHistory.goBack();
     $state.go("login");
@@ -83,11 +106,6 @@ app.controller('RegCtrl', function($scope, $ionicHistory, $window, $ionicPopup, 
   $scope.data = {};
 
   $scope.regist = function(){
-    var email = $scope.data.email;
-    var username = $scope.data.username;
-    var user = $scope.data.name;
-    var pass = $scope.data.password;
-
     $ionicLoading.show({
       template: '<ion-spinner icon="android"></ion-spinner>'
       //duration: 1000
@@ -95,52 +113,41 @@ app.controller('RegCtrl', function($scope, $ionicHistory, $window, $ionicPopup, 
        //console.log("The loading indicator is now displayed");
     });
 
-    //console.log(email); email == undefined || user ==undefined || pass == undefined || username ==undefined
+    console.log(md5.createHash($scope.data.password));
 
-    if (email=='') {
+    var usersRef = firebase.database().ref('users/'+$scope.data.username);
+    usersRef.set({
+      email: $scope.data.email,
+      // username: $scope.data.username,
+      user: $scope.data.name,
+      password: md5.createHash($scope.data.password)
+    });
+
+    usersRef.on("child_added", function(data, prevChildKey){
+      var newPlayer = data.val();
+      // console.log("Name: "+newPlayer.name);
+      // console.log("Age: "+newPlayer.age);
+      // console.log("Number: "+newPlayer.number);
+      // console.log("Previouse Player: "+prevChildKey);
+      $window.localStorage.setItem("email", $scope.data.email);
+      $window.localStorage.setItem("username", $scope.data.username);
+      $window.localStorage.setItem("password", md5.createHash($scope.data.password));
+      $ionicLoading.hide();
+
+      var alertPopup = $ionicPopup.alert({
+          title: 'Register Success!',
+          template: "Username "+$scope.data.username
+      });
+      $ionicLoading.hide();
+      //$state.go("login");
+
+    }, function(error){
       var alertPopup = $ionicPopup.alert({
           title: 'Register failed!',
           template: "Harap terisi semua format email harus benar"
       });
       $ionicLoading.hide();
-    }else{
-      // $url = "http://localhost:8080/sinauserv/class/model/user.create.php";
-      
-      // $http.post($url, {
-      //   email : email,
-      //   username : username,
-      //   user : user,
-      //   pass : pass
-      // }).then(function(res){
-      //   var result = res;
-      //   console.log(String(result.data)+" "+"\"success\"");
-
-      //   $ionicLoading.hide();
-      //   if (String(result.data)==="success") {
-      //       var alertPopup = $ionicPopup.alert({
-      //           title: 'Register Success!',
-      //           template: "login dengan username : "+result.data
-      //       });            
-      //   }else{
-      //       var alertPopup = $ionicPopup.alert({
-      //           title: 'Login failed!',
-      //           template: "Faild"
-      //       });
-      //       $scope.data.email = '';
-      //       $scope.data.username = '';
-      //       $scope.data.name = '';
-      //       $scope.data.password = '';
-      //   }
-
-      //   //$state.go("login");
-      // });
-
-      $window.localStorage.setItem("email", email);
-      $window.localStorage.setItem("username", username);
-      $window.localStorage.setItem("password", pass);
-      $ionicLoading.hide();
-      $state.go("login");
-
-    }
+      console.log("Error "+error.code)
+    });
   }
 })
