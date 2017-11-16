@@ -49,7 +49,7 @@ app.controller('loginCtrl', function($scope, $state, $http, $ionicPopup, Firebas
         }
       }, function(error){
         console.log("Error: "+error.code);
-      })
+      });
 
       var userLog = $window.localStorage.getItem("username");
       var passLog = $window.localStorage.getItem("password");
@@ -112,42 +112,60 @@ app.controller('RegCtrl', function($scope, $ionicHistory, $window, $ionicPopup, 
     }).then(function(){
        //console.log("The loading indicator is now displayed");
     });
+      //console.log(username);
+      var ret = '';
+      var uRef = firebase.database().ref('users/'+$scope.data.username);
+      uRef.on("value", function(snapshot){      
+        console.log(snapshot.val());
+        ret = snapshot.val();
 
-    console.log(md5.createHash($scope.data.password));
+        if (ret == '' || ret == null) {
+            var usersRef = firebase.database().ref('users/'+$scope.data.username);
+            //var cek = cekdb($scope.data.username);
 
-    var usersRef = firebase.database().ref('users/'+$scope.data.username);
-    usersRef.set({
-      email: $scope.data.email,
-      // username: $scope.data.username,
-      user: $scope.data.name,
-      password: md5.createHash($scope.data.password)
-    });
+            //console.log("Cek :"+cek);
+            usersRef.set({
+              email: $scope.data.email,
+              // username: $scope.data.username,
+              user: $scope.data.name,
+              password: md5.createHash($scope.data.password)
+            });
 
-    usersRef.on("child_added", function(data, prevChildKey){
-      var newPlayer = data.val();
-      // console.log("Name: "+newPlayer.name);
-      // console.log("Age: "+newPlayer.age);
-      // console.log("Number: "+newPlayer.number);
-      // console.log("Previouse Player: "+prevChildKey);
-      $window.localStorage.setItem("email", $scope.data.email);
-      $window.localStorage.setItem("username", $scope.data.username);
-      $window.localStorage.setItem("password", md5.createHash($scope.data.password));
-      $ionicLoading.hide();
+            usersRef.on("child_added", function(data, prevChildKey){
+              var newPlayer = data.val();
+              // console.log("Name: "+newPlayer.name);
+              // console.log("Age: "+newPlayer.age);
+              // console.log("Number: "+newPlayer.number);
+              // console.log("Previouse Player: "+prevChildKey);
+              $window.localStorage.setItem("email", $scope.data.email);
+              $window.localStorage.setItem("username", $scope.data.username);
+              $window.localStorage.setItem("password", md5.createHash($scope.data.password));
+              $ionicLoading.hide();
 
-      var alertPopup = $ionicPopup.alert({
-          title: 'Register Success!',
-          template: "Username "+$scope.data.username
+              var alertPopup = $ionicPopup.alert({
+                  title: 'Register Success!',
+                  template: "Username "+$scope.data.username
+              });
+              $ionicLoading.hide();
+              //$state.go("login");
+
+            }, function(error){
+              var alertPopup = $ionicPopup.alert({
+                  title: 'Register failed!',
+                  template: "Harap terisi semua, format email harus benar"
+              });
+              $ionicLoading.hide();
+              console.log("Error "+error.code)
+            });
+        }else{
+          var alertPopup = $ionicPopup.alert({
+            title: 'Register failed!',
+            template: "Username sudah terdaftar"
+          });
+          $ionicLoading.hide();
+        }
+      }, function(error){
+          console.log("Error: "+error.code);
       });
-      $ionicLoading.hide();
-      //$state.go("login");
-
-    }, function(error){
-      var alertPopup = $ionicPopup.alert({
-          title: 'Register failed!',
-          template: "Harap terisi semua format email harus benar"
-      });
-      $ionicLoading.hide();
-      console.log("Error "+error.code)
-    });
   }
 })

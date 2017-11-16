@@ -94,7 +94,7 @@ app.controller('homeCtrl', function($scope, $state, $window, $stateParams, $ioni
     };
 
 
-    console.log(log);
+   // console.log(log);
 
 
     $scope.face = 'img/lg.png';
@@ -106,7 +106,7 @@ app.controller('homeCtrl', function($scope, $state, $window, $stateParams, $ioni
     });
 
     $scope.$on("$ionicSlides.slideChangeStart", function(event, data){
-      console.log('Slide change is beginning');
+      //console.log('Slide change is beginning');
     });
 
     $scope.$on("$ionicSlides.slideChangeEnd", function(event, data){
