@@ -1,10 +1,36 @@
-app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation) {
+app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ionicModal) {
  var options = {timeout: 10000, enableHighAccuracy: true};
  $scope.tarif = 'Rp. 0';
 
  $scope.goBack = function(){
   $state.go('app.dash');
  };
+
+  $ionicModal.fromTemplateUrl('templates/modal-yoride.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+    id1 = "not";
+  };
+
+ var id1 = "not";
+
+ $scope.onSearchChange1 = function(){
+    if (id1 == "not") {
+      console.log("popup");
+      $scope.modal.show();
+      id1="yes";
+
+      var inpurdari = document.getElementById('inpurdari');
+      var searchDari = new google.maps.places.SearchBox(inpurdari);
+    }
+ };
+
+ $scope.modalData = {};
  
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
  
@@ -104,8 +130,12 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation) {
 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
+    var inpurdari = document.getElementById('inpurdari');
+
+    console.log(inpurdari);
     var search = document.getElementById('search');
     var inputtuj = document.getElementById('tuj-input');
+    //var searchDari = new google.maps.places.SearchBox(inpurdari);
     var searchBox = new google.maps.places.SearchBox(input);
     var searchBoxtuj = new google.maps.places.SearchBox(inputtuj);
 
