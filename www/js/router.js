@@ -61,6 +61,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
+  .state('app.yofood', {
+      url: '/yofood',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/yofood.html',
+          controller: 'yofoodCtrl'
+        }
+      }
+    })
     .state('app.playlists', {
       url: '/playlists',
       views: {

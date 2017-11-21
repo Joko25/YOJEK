@@ -6,6 +6,17 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
   $state.go('app.dash');
  };
 
+  $scope.disableTap = function() {
+    //alert("as");
+    var container = document.getElementsByClassName('pac-container');
+    angular.element(container).attr('data-tap-disabled', 'true');
+    var backdrop = document.getElementsByClassName('backdrop');
+    angular.element(backdrop).attr('data-tap-disabled', 'true');
+    angular.element(container).on("click", function() {
+      document.getElementById('search').blur();
+    });
+  };
+
   $ionicModal.fromTemplateUrl('templates/modal-yoride.html', {
     scope: $scope
   }).then(function(modal) {
@@ -130,9 +141,9 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
-    var inpurdari = document.getElementById('inpurdari');
+    // var inpurdari = document.getElementById('inpurdari');
 
-    console.log(inpurdari);
+    //console.log(inpurdari);
     var search = document.getElementById('search');
     var inputtuj = document.getElementById('tuj-input');
     //var searchDari = new google.maps.places.SearchBox(inpurdari);

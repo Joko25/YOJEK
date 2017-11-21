@@ -1,0 +1,27 @@
+<ion-view view-title="YO FOOD">
+  <ion-content>
+    <ion-slides align='center' style="height: 25%" options="options" slider="data.slider" does-continue="true">
+      <ion-slide-page ng-repeat="slides in slide">
+          <div class="box {{slides.background}}">
+            <img  ng-src="{{slides.face}}" class="imgBg" style="width: 100%">
+            <!-- <h3>{{slides.title}}</h3>
+            <p>{{slides.desc}}</p> -->
+          </div>
+        </ion-slide-page>
+    </ion-slides>
+
+    <label class="item item-input">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input id="pac-input" type="text" placeholder="Search..." data-tap-disabled="true">
+    </label>
+
+    <ion-list>
+      <div ng-repeat="d in data" class="card" align="center" style="margin-bottom: 10px;">
+        <div class="item item-body" style="vertical-align:middle; background-image: url('{{d.bg}}'); background-size: 100%;">
+          <h1 style="color: #fff; text-shadow: 1px 1px #000;">{{d.title}}</h1>
+          <p style="color: #fff; text-shadow: 1px 1px #000;">{{d.desc}}</p>
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

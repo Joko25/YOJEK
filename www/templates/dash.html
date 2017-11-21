@@ -1,66 +1,52 @@
+<ion-view> <!-- class="bgdash" -->
+	<ion-nav-title>
+
+    <!-- <h3>Yo Jek</h3> -->
+    <img class="title-image" src="img/lg.png" width="45%" style="margin-top: 2%" />
+    </ion-nav-title>
 <ion-content align="center" scroll="false" >
-<ion-view class="bgdash">
 
 	<!-- <ion-nav-title align-title="center">
 	</ion-nav-bar> -->
-	<!-- <ion-nav-title>
-    </ion-nav-title> -->
     <!-- <div id="map" data-tap-disabled="true"></div> -->
-    <!-- <h3>Yo Jek</h3> -->
-    <img class="title-image" src="img/lg.png" width="35%" style="margin-top: 2%" />
 
-    <ion-slides align='center' style="height: 65%" options="options" slider="data.slider" does-continue="true">
-        <ion-slide-page>
-            <div class="box energized-bg">
-                <img  ng-src="{{facea}}" class="imglogo" style="margin-bottom: 10%; margin-top: 20%; width: 20%">
-                <h3>Selamat datang di YOJEK</h3>
-                <p>Terimakasih telah menggunakan layanan kami.</p>
-                
+    <ion-slides align='center' style="height: 45%" options="options" slider="data.slider" does-continue="true">
+    	<ion-slide-page ng-repeat="slides in slide">
+        	<div class="box {{slides.background}}">
+                <img  ng-src="{{slides.face}}" class="imglogo" style="margin-top: 20%; width: 10%">
+                <h3>{{slides.title}}</h3>
+                <p>{{slides.desc}}</p>
             </div>
-          </ion-slide-page>
-          <ion-slide-page>
-            <div class="box energized-bg">
-              <img  ng-src="{{face2}}" class="imglogo avatar" style="margin-top: 20%; width: 20%">
-                <h3>Promo hari ini</h3>
-                <p>dapatkan 100poin setiap 1 kali menggunakan layanan Yojek</p>
-            </div>
-          </ion-slide-page>
-          <ion-slide-page>
-            <div class="box energized-bg">
-              <img  ng-src="{{face}}" class="imglogo avatar" style="margin-bottom: 10%; margin-top: 20%; width: 30%">
-                <h3>Layanan kami</h3>
-                <p>Kebebasan dalam mengatur jadwal kerja, luangkan waktu untuk momen berharga anda.</p>
-            </div>
-          </ion-slide-page>
+        </ion-slide-page>
     </ion-slides>
 
     <div class="row">
-	  	<div class="col col-45 card" align="center" ng-click="yoRide()">
-			<div class="item item-body" style="vertical-align:middle;">
-				<img class="full-image" src="img/yoride.png" style="width:70%; height: 20%;">
+	  	<div class="col col-45 card btn energized-bg" align="center" ng-click="yoRide()">
+			<div class="item item-body energized-bg" style="vertical-align:middle;">
+				<img class="full-image" src="img/yoride.png" style="width: 80%; height: 20%;">
 			</div>
 		</div>
-	  	<div class="col col-45 card" align="center">
-	  		<div class="item item-body">
-				<img class="full-image" src="img/yogoods.png" style="width: 75%; height: 20%;">
+	  	<div class="col col-45 card btn energized-bg" align="center">
+	  		<div class="item item-body energized-bg">
+				<img class="full-image" src="img/yogoods.png" style="width: 80%; height: 20%;">
 			</div>
 	 	</div>
 		<!-- <div class="col">.col</div> -->
 	</div>
 	<div class="row">
-		<div class="col col-45 card" align="center">
+		<div class="col col-45 card btn energized-bg" align="center" ng-click="yoFood()">
 
-	  		<div class="item item-body">
-				<img class="full-image" src="img/yofood.png" style="width: 70%; height: 20%;">
+	  		<div class="item item-body energized-bg">
+				<img class="full-image" src="img/yofood.png" style="width: 80%; height: 20%;">
 			</div>
 	 	</div>
 	 	<!-- <div class="col col-05"></div> -->
-	  	<div class="col col-45 card">
-	  		<div class="item item-body">
-				<img class="full-image" src="img/yomart.png" style="width: 70%; height: 20%;">
+	  	<div class="col col-45 card btn energized-bg">
+	  		<div class="item item-body energized-bg">
+				<img class="full-image" src="img/yomart.png" style="width: 80%; height: 20%;">
 			</div>
 	 	</div>
 	  <!-- <div class="col">.col</div> -->
 	</div>
-</ion-view>
 </ion-content>
+</ion-view>
