@@ -40,6 +40,17 @@ app.controller('loginCtrl', function($scope, $state, $http, $ionicPopup, Firebas
           $ionicLoading.hide();
           $state.go("app.dash");
           $window.localStorage.setItem("log", "true");
+
+          UserService.setUser({
+            userID: username,
+            name: user_data.displayName,
+            email: snapshot.val().email,
+            picture: '',
+            accessToken: '',
+            idToken: ''
+          });
+
+          console.log(userLog);
         }else{
           var alertPopup = $ionicPopup.alert({
             title: 'Login error!',
@@ -51,8 +62,6 @@ app.controller('loginCtrl', function($scope, $state, $http, $ionicPopup, Firebas
         console.log("Error: "+error.code);
       });
 
-      var userLog = $window.localStorage.getItem("username");
-      var passLog = $window.localStorage.getItem("password");
       //console.log("LOGIN user: " + userLog + " - PW: " + passLog);
     }
 
