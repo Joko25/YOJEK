@@ -28,17 +28,40 @@ app.config(function($stateProvider, $urlRouterProvider) {
     
   })
 
+  .state('yogood', {
+    url: '/yogood',
+    templateUrl: 'templates/yogood.html',
+    controller: 'yogoodCtrl'
+    
+  })
+
+  .state('yomart', {
+    url: '/yomart',
+    templateUrl: 'templates/yomart.html',
+    controller: 'yomartCtrl'
+    
+  })
+
     .state('reg', {
     url: '/reg',
     templateUrl: 'templates/reg.html',
     controller: 'RegCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.yomart', {
+    url: '/yomart',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/yomart.html'
+      }
+    }
+  })
+
+  .state('app.yogood', {
+    url: '/yogood',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/yogood.html'
       }
     }
   })

@@ -2,8 +2,14 @@ app.controller('dashCtrl', function($scope, $state, $cordovaGeolocation) {
   $scope.yoRide  = function(){
     $state.go("yoride");
   }
+  $scope.yoGood  = function(){
+    $state.go("app.yogood");
+  }
   $scope.yoFood  = function(){
     $state.go("app.yofood");
+  }
+  $scope.yoMart  = function(){
+    $state.go("app.yomart");
   }
 	$scope.options = {
       loop: false,
@@ -50,5 +56,4 @@ app.controller('dashCtrl', function($scope, $state, $cordovaGeolocation) {
       $scope.activeIndex = data.slider.activeIndex;
       $scope.previousIndex = data.slider.previousIndex;
     });
-
 });

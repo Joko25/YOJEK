@@ -19,7 +19,7 @@ https://stackoverflow.com/questions/34812616/could-not-find-any-version-that-mat
 ?NMXc,7XXM
 
 https://www.pubnub.com/tutorials/javascript/mapping-javascript-tracking/
-
+https://developers.google.com/maps/documentation/javascript/firebase
 https://developers.google.com/maps/documentation/javascript/geolocation
 
 https://developers.google.com/maps/documentation/javascript/examples/places-searchbox?hl=id
@@ -35,6 +35,7 @@ https://firebase.google.com/docs/web/setup?authuser=0
 https://firebase.googleblog.com/2016/01/social-login-with-ionic_77.html
 https://loading.io/
 https://www.tutorialspoint.com/firebase/firebase_event_types.htm
+https://medium.com/google-cloud/firebase-is-cool-geofire-is-just-awesome-b7f2be5e0f0f
 
 https://devdactic.com/ionic-push-notifications-guide/
 http://ngcordova.com/docs/plugins/pushNotifications/
