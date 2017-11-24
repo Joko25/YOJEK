@@ -147,8 +147,8 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
     var search = document.getElementById('search');
     var inputtuj = document.getElementById('tuj-input');
     //var searchDari = new google.maps.places.SearchBox(inpurdari);
-    var searchBox = new google.maps.places.SearchBox(input);
-    var searchBoxtuj = new google.maps.places.SearchBox(inputtuj);
+    // var searchBox = new google.maps.places.SearchBox(input);
+    // var searchBoxtuj = new google.maps.places.SearchBox(inputtuj);
 
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
     $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(search);
