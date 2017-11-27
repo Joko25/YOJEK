@@ -17,6 +17,17 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
     });
   };
 
+  $scope.disableTap2 = function() {
+    //alert("as");
+    var container = document.getElementsByClassName('pac-container');
+    angular.element(container).attr('data-tap-disabled', 'true');
+    var backdrop = document.getElementsByClassName('backdrop');
+    angular.element(backdrop).attr('data-tap-disabled', 'true');
+    angular.element(container).on("click", function() {
+      document.getElementById('tuj-input').blur();
+    });
+  };
+
   $ionicModal.fromTemplateUrl('templates/modal-yoride.html', {
     scope: $scope
   }).then(function(modal) {
@@ -49,6 +60,7 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
     var directionsDisplay = new google.maps.DirectionsRenderer;
     var directionsService = new google.maps.DirectionsService;
     var service = new google.maps.DistanceMatrixService();
+    var countryRestrict = {'country': 'us'};
  
     var mapOptions = {
       center: latLng,
@@ -147,8 +159,14 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
     var search = document.getElementById('search');
     var inputtuj = document.getElementById('tuj-input');
     //var searchDari = new google.maps.places.SearchBox(inpurdari);
-    var searchBox = new google.maps.places.SearchBox(input);
-    var searchBoxtuj = new google.maps.places.SearchBox(inputtuj);
+    //var searchBox = new google.maps.places.SearchBox(input);
+    var autocomplete = new google.maps.places.Autocomplete(input, {
+      componentRestrictions: { country: "ID" }
+    });
+    // var searchBoxtuj = new google.maps.places.SearchBox(inputtuj);
+    var searchBoxtuj = new google.maps.places.Autocomplete(inputtuj, {
+      componentRestrictions: { country: "ID" }
+    });
 
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
     $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(search);
@@ -159,7 +177,12 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
       //console.log(directionsService+' '+directionsDisplay);
     };
     //document.getElementById('pac-input').addEventListener('change', onChangeHandler);
-    document.getElementById('tuj-input').addEventListener('change', onChangeHandler);
+    //document.getElementById('tuj-input').addEventListener('change', onChangeHandler);
+
+    $scope.goMap = function(){
+      //alert('test');
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+    }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       var start = document.getElementById('pac-input').value;
@@ -234,8 +257,8 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
     //$scope.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(inputtuj);
 
     var icon = {
-      url: 'img/ripple.gif', // url
-      scaledSize: new google.maps.Size(70, 70)
+      url: 'img/marker.png', // url
+      scaledSize: new google.maps.Size(45, 60)
               
     };
 
