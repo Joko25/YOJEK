@@ -20,15 +20,23 @@
         </ion-slide-page>
     </ion-slides>
 
+    <div class="item item-input-inset">
+	    <label class="item-input-wrapper">
+	      <input type="text" placeholder="Search" ng-model="search">
+	    </label>
+
+	    <button ng-click="search = ''" class="button ion-android-close input-button button-small" ng-show="search.length"></button>
+	</div>
+
     <div class="row">
 	  	<div class="col col-45">
-	  		<button class="button button-full button-energized icon-left ion-android-bicycle" ng-click="yoRide()">YO RIDE</button>
+	  		<button class="button button-full button-energized icon-left ion-android-bicycle" ng-click="yoRide()">YO-RIDE</button>
 			<!-- <div class="item item-body energized-bg" style="vertical-align:middle;">
 				<img class="full-image" src="img/yoride.png" style="width: 80%; height: 20%;">
 			</div> -->
 		</div>
 	  	<div class="col col-45">
-    		<button class="button button-full button-energized icon-left ion-cube" ng-click="yoGood()">YO GOODS</button>
+    		<button class="button button-full button-energized icon-left ion-cube" ng-click="yoGood()">YO-GOODS</button>
 	  		<!-- <div class="item item-body energized-bg">
 				<img class="full-image" src="img/yogoods.png" style="width: 80%; height: 20%;">
 			</div> -->
@@ -37,7 +45,7 @@
 	</div>
 	<div class="row">
 		<div class="col col-45">
-			<button class="button button-full button-energized icon-left ion-android-restaurant" ng-click="yoFood()">YO FOOD</button>
+			<button class="button button-full button-energized icon-left ion-android-restaurant" ng-click="yoFood()">YO-FOOD</button>
 
 	  		<!-- <div class="item item-body energized-bg">
 				<img class="full-image" src="img/yofood.png" style="width: 80%; height: 20%;">
@@ -45,7 +53,7 @@
 	 	</div>
 	 	<!-- <div class="col col-05"></div> -->
 	  	<div class="col col-45">
-	  		<button class="button button-full button-energized icon-left ion-android-cart" ng-click="yoMart()">YO MART</button>
+	  		<button class="button button-full button-energized icon-left ion-android-cart" ng-click="yoMart()">YO-MART</button>
 	  		<!-- <div class="item item-body energized-bg">
 				<img class="full-image" src="img/yomart.png" style="width: 80%; height: 20%;">
 			</div> -->

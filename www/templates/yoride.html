@@ -5,10 +5,14 @@
         <label class="item item-input" style="width: 90%;">
           <i class="icon ion-ios-location placeholder-icon"></i>
           <input id="pac-input" type="text" placeholder="Search Location" data-tap-disabled="true" ng-change='disableTap()' ng-model="search1">
+          <button ng-click="search1 = ''" class="button ion-android-close input-button button-small" ng-show="search1.length"></button>
         </label>
         <label class="item item-input" style="width: 90%;">
           <i class="icon ion-ios-navigate placeholder-icon"></i>
           <input id="tuj-input" type="text" placeholder="Tujuan" ng-model="input2" ng-change="onSearchChange2()"> <!-- class="controls" -->
+          <button ng-click="input2 = ''" class="button ion-android-close input-button button-small" ng-show="input2.length"></button>
+          <button ng-click="goMap()" class="button ion-android-send input-button button-small" ng-show="input2.length"></button>
+          <button ng-click="goMap()" class="button ion-android-clipboard input-button button-small" ng-hide="input2.length"></button>
         </label>
         <!-- <label><button class="button button-energized icon ion-android-navigate"></button></label> -->
       </div>
