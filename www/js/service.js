@@ -16,7 +16,6 @@ app.service('UserService', function() {
 });
 
 app.service('Firebase', function(){
-
   var config = {
     apiKey: "AIzaSyCWgtmcKZyKEOmXUdccDWfKK3yTa5K2nvQ",
     authDomain: "fir-yojek.firebaseapp.com",
@@ -28,4 +27,4 @@ app.service('Firebase', function(){
 
   return firebase.initializeApp(config);
   
-})
+});

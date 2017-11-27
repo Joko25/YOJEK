@@ -19,17 +19,22 @@ app.controller('dashCtrl', function($scope, $state, $cordovaGeolocation) {
   };
   
   $scope.slide = [{
-    background: 'light-bg',
+    background: 'img/4.jpeg',
     title: 'Selamat datang di YOJEK',
     desc: 'Terimakasih telah menggunakan layanan kami.',
     face: '#'
   },{
-    background: 'energized-bg',
+    background: 'img/1.jpeg',
     title: 'Promo hari ini',
     desc: 'dapatkan 100poin setiap 1 kali menggunakan layanan Yojek',
     face: 'img/lg2.png'
   },{
-    background: 'light-bg',
+    background: 'img/2.jpeg',
+    title: 'Layanan kami',
+    desc: 'Description',
+    face: 'img/lg.png'
+  },{
+    background: 'img/3.jpeg',
     title: 'Layanan kami',
     desc: 'Description',
     face: 'img/lg.png'

@@ -17,9 +17,13 @@
 
     <ion-list>
       <div ng-repeat="d in data" class="card" align="center" style="margin-bottom: 10px;">
-        <div class="item item-body" style="vertical-align:middle; background-image: url('{{d.bg}}'); background-size: 100%;">
-          <h1 style="color: #fff; text-shadow: 1px 1px #000;">{{d.title}}</h1>
-          <p style="color: #fff; text-shadow: 1px 1px #000;">{{d.desc}}</p>
+        <div class="item item-body" style="vertical-align:middle; background-image: url('{{d.bg}}'); background-size: 100%; background-color: transparent;margin:0;">
+          <div style="width:100%;background: rgba(119, 119, 119, 0.34); position: relative; z-index: 1;margin:0;">
+            
+            <h1 style="color: #fff; text-shadow: 1px 1px #000;">{{d.title}}</h1>
+            <p style="color: #fff; text-shadow: 1px 1px #000;">{{d.desc}}</p>
+            
+          </div>
         </div>
       </div>
     </ion-list>

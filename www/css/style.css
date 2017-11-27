@@ -138,3 +138,19 @@ i.ion-social-buffer-outline {
 /*.card .btn:hover{
    background-color:#d0d0d0;
 }*/
+
+#box-bg_ {
+  /*position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1;*/
+  background-position: center;
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
+  border: 1px solid blue;
+}

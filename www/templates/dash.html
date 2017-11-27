@@ -10,12 +10,12 @@
 	</ion-nav-bar> -->
     <!-- <div id="map" data-tap-disabled="true"></div> -->
 
-    <ion-slides align='center' style="height: 45%" options="options" slider="data.slider" does-continue="true">
+    <ion-slides align='center' style="height: 32%" options="options" slider="data.slider" does-continue="true">
     	<ion-slide-page ng-repeat="slides in slide">
-        	<div class="box {{slides.background}}">
-                <img  ng-src="{{slides.face}}" class="imglogo" style="margin-top: 20%; width: 10%">
-                <h3>{{slides.title}}</h3>
-                <p>{{slides.desc}}</p>
+        	<div class="box" style="background-image: url('{{slides.background}}'); background-size: 100%;">
+                <!-- <img  ng-src="{{slides.face}}" class="imglogo" style="margin-top: 20%; width: 10%"> -->
+                <!-- <h3>{{slides.title}}</h3>
+                <p>{{slides.desc}}</p> -->
             </div>
         </ion-slide-page>
     </ion-slides>
