@@ -15,7 +15,7 @@ https://ionicthemes.com/tutorials/about/google-plus-login-with-ionic-framework
 https://www.npmjs.com/package/cordova-plugin-googleplus
 https://stackoverflow.com/questions/34812616/could-not-find-any-version-that-matches-com-google-android-gmsplay-services-plu
 
-????????•???????¤?
+????????â€¢???????Â¤?
 ?NMXc,7XXM
 
 https://www.pubnub.com/tutorials/javascript/mapping-javascript-tracking/
@@ -43,3 +43,5 @@ https://github.com/katzer/cordova-plugin-local-notifications
 
 
 https://forum.ionicframework.com/t/pull-to-refresh-is-not-working/7500/6
+
+ 

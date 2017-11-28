@@ -258,7 +258,7 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
 
     var icon = {
       url: 'img/marker.png', // url
-      scaledSize: new google.maps.Size(45, 60)
+      scaledSize: new google.maps.Size(40, 49)
               
     };
 
