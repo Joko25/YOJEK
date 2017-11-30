@@ -1,6 +1,7 @@
-app.controller('dashCtrl', function($scope, $state, $cordovaGeolocation) {
+app.controller('dashCtrl', function($scope, $state, $cordovaGeolocation, $window) {
   $scope.yoRide  = function(){
     $state.go("yoride");
+    $window.location.reload(true);
   }
   $scope.yoGood  = function(){
     $state.go("app.yogood");

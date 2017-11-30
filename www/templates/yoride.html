@@ -12,7 +12,7 @@
         <input id="tuj-input" type="text" placeholder="Tujuan" ng-model="input2" ng-change="disableTap2()"> <!-- class="controls" -->
         <button ng-click="input2 = ''" class="button button-small icon ion-android-close" style="background-color: #fff;" ng-show="input2.length"></button>
         <button ng-click="goMap()" class="button button-small icon ion-android-send" style="background-color: #fff;" ng-show="input2.length"></button>
-        <button ng-click="detail()" class="button button-small icon ion-android-clipboard" style="background-color: #fff;" ng-hide="input2.length"></button>
+        <button ng-click="onSearchChange1()" class="button button-small icon ion-android-clipboard" style="background-color: #fff;" ng-hide="input2.length"></button>
       </label>
       <!-- <label><button class="button button-energized icon ion-android-navigate"></button></label> -->
     </div>
@@ -20,14 +20,14 @@
 	</div>
   <div id="map" data-tap-disabled="true"></div>
 </ion-content>
-<div class="bar bar-footer bar-stable" style="height: 14%">
+<div class="bar bar-footer bar-stable" style="height: 15%">
   <div class="row" style="padding: 0; margin: 0;">
     <div class="col col-100">
       <div class="row" style="padding: 0; margin: 0;">
         <div class="col" >
-    		  <span id="tarif">Tarif : </span>
+    		  <span>Tarif : </span>
         </div>
-        <div class="col" align="right">
+        <div class="col" align="right" id="tarif">
           {{tarif}}
         </div>
       </div>

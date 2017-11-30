@@ -45,3 +45,6 @@ https://github.com/katzer/cordova-plugin-local-notifications
 https://forum.ionicframework.com/t/pull-to-refresh-is-not-working/7500/6
 
  
+ https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
+
+ https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-directions

@@ -1,6 +1,12 @@
-app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ionicModal) {
+app.controller('yorideCtrl', function($scope, $state, $http, $cordovaGeolocation, $ionicModal) {
  var options = {timeout: 10000, enableHighAccuracy: true};
  $scope.tarif = 'Rp. 0';
+
+ var marker;
+
+ var map;
+
+ var latLng;
 
  $scope.goBack = function(){
   $state.go('app.dash');
@@ -42,25 +48,72 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
  var id1 = "not";
 
  $scope.onSearchChange1 = function(){
-    if (id1 == "not") {
+    // if (id1 == "not") {
       console.log("popup");
       $scope.modal.show();
       id1="yes";
 
       var inpurdari = document.getElementById('inpurdari');
       var searchDari = new google.maps.places.SearchBox(inpurdari);
-    }
+      //var latLng = {lat: -33.866, lng: 151.196};
+
+      //console.log(latLng);
+
+      var service = new google.maps.places.PlacesService(map);
+      service.nearbySearch({
+        location: latLng,
+        radius: 500//,
+        //type: ['store']
+      }, processResults);
+
+      function processResults(results, status, pagination) {
+        if (status !== google.maps.places.PlacesServiceStatus.OK) {
+          return;
+        } else {
+          createMarkers(results);
+
+          if (pagination.hasNextPage) {
+            var moreButton = document.getElementById('more');
+
+            moreButton.disabled = false;
+
+            moreButton.addEventListener('click', function() {
+              moreButton.disabled = true;
+              pagination.nextPage();
+            });
+          }
+        }
+      }
+
+      function createMarkers(places) {
+        console.log(places);
+        //var bounds = new google.maps.LatLngBounds();
+        var placesList = document.getElementById('places');
+
+        $scope.place = [];
+        for (var i = 0, place; place = places[i]; i++) {
+
+          placesList.innerHTML += "<a class='item item-avatar'> <img src='"+place.icon+"' /> <h2>" + place.name + "</h2> <p>"+place.vicinity+" </p></a>";
+          
+          //bounds.extend(place.geometry.location);
+          //sc
+        }
+        //map.fitBounds(bounds);
+      }
+    // }
  };
 
  $scope.modalData = {};
  
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+
+    //$scope.tarif = 'ter';
  
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     var directionsDisplay = new google.maps.DirectionsRenderer;
     var directionsService = new google.maps.DirectionsService;
     var service = new google.maps.DistanceMatrixService();
-    var countryRestrict = {'country': 'us'};
+    //var countryRestrict = {'country': 'us'};
  
     var mapOptions = {
       center: latLng,
@@ -168,9 +221,15 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
       componentRestrictions: { country: "ID" }
     });
 
+
+
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    map = $scope.map;
     $scope.map.controls[google.maps.ControlPosition.TOP_LEFT].push(search);
     directionsDisplay.setMap($scope.map);
+
+    
 
     var onChangeHandler = function() {
       calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -180,7 +239,7 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
     //document.getElementById('tuj-input').addEventListener('change', onChangeHandler);
 
     $scope.goMap = function(){
-      //alert('test');
+      
       calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
 
@@ -208,6 +267,8 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
       });
     }
 
+    var harga = 0;
+
     function callback(response, status) {
       console.log(response);
       if (status != google.maps.DistanceMatrixStatus.OK) {
@@ -223,7 +284,7 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
           var jrk = response.rows[0].elements[0].distance.text;
           var jarak = parseFloat(jrk.replace(/km/g,''));
           var jarak_awal = 5;
-          var harga = 0;
+          
           var harga_awal = 8000;
 
           if (jarak > jarak_awal) {
@@ -234,7 +295,9 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
           }
 
           harga = harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          document.getElementById("tarif").innerHTML = "Tarif : Rp. "+harga+";<br/> Jarak ("+jrk+")";
+
+             
+          document.getElementById("tarif").innerHTML = "Rp. "+harga+";("+jrk+")";
           console.log(response.rows[0].elements[0].duration.text);
           console.log(response.rows[0].elements[0].distance.text); 
       }
@@ -259,20 +322,48 @@ app.controller('yorideCtrl', function($scope, $state, $cordovaGeolocation, $ioni
     var icon = {
       url: 'img/marker.png', // url
       scaledSize: new google.maps.Size(40, 49)
-              
     };
 
+    // google.maps.event.addListener($scope.map, 'drag', function (event) {
+    //     marker.setPosition($scope.map.getCenter());
+    // });
+
     google.maps.event.addListenerOnce($scope.map, 'idle', function(){
- 
-      var marker = new google.maps.Marker({
+
+      var latitude = latLng.lat();
+      var longitude = latLng.lng();
+
+      straddr = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+latitude+','+longitude+'&sensor=true';
+      console.log(straddr);
+      $http.get(straddr)
+      .success(function(response){
+          console.log(response.results[0].formatted_address);
+          $scope.search1 = response.results[0].formatted_address;
+      })
+      .error(function(){
+        var alertPopup = $ionicPopup.alert({
+          title: 'Fild!',
+          template: 'Please check your connection!'
+        });
+      });
+
+      marker = new google.maps.Marker({
           map: $scope.map,
           animation: google.maps.Animation.DROP,
           position: latLng,
-          icon: icon,
+          // icon: new google.maps.MarkerImage('http://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+          //                                               new google.maps.Size(22,22),
+          //                                               new google.maps.Point(0,18),
+          //                                               new google.maps.Point(11,11)),
+          icon:icon,
+          shadow: 100,
+          zIndex: 999,
           optimized: false
       });
      
     });
+
+    
  
   }, function(error){
     console.log("Could not get location");
