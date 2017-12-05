@@ -4,7 +4,7 @@ app.controller('dashCtrl', function($scope, $state, $cordovaGeolocation, $window
     $window.location.reload(true);
   }
   $scope.yoGood  = function(){
-    $state.go("app.yogood");
+    $state.go("yogood");
   }
   $scope.yoFood  = function(){
     $state.go("app.yofood");
