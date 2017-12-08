@@ -321,7 +321,7 @@ app.controller('yorideCtrl', function($scope, $state, $http, $cordovaGeolocation
 
     var icon = {
       url: 'img/marker.png', // url
-      scaledSize: new google.maps.Size(40, 49)
+      scaledSize: new google.maps.Size(45, 55)
     };
 
     // google.maps.event.addListener($scope.map, 'drag', function (event) {
