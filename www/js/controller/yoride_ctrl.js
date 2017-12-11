@@ -294,9 +294,7 @@ app.controller('yorideCtrl', function($scope, $state, $http, $cordovaGeolocation
             harga = 8000;
           }
 
-          harga = harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-             
+          harga = harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");            
           document.getElementById("tarif").innerHTML = "Rp. "+harga+";("+jrk+")";
           console.log(response.rows[0].elements[0].duration.text);
           console.log(response.rows[0].elements[0].distance.text); 

@@ -44,7 +44,16 @@ https://github.com/katzer/cordova-plugin-local-notifications
 
 https://forum.ionicframework.com/t/pull-to-refresh-is-not-working/7500/6
 
- 
- https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
+https://developers.google.com/maps/documentation/javascript/examples/place-search-pagination
 
- https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-directions
+https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-directions
+
+https://codelabs.developers.google.com/codelabs/realtime-asset-tracking/index.html?index=..%2F..%2Findex
+https://stackoverflow.com/questions/25209536/how-to-track-real-time-position-using-google-map-api
+https://stackoverflow.com/questions/3545899/real-time-google-map
+https://www.quora.com/How-do-I-build-a-real-time-location-app-like-Uber
+http://ngcordova.com/docs/plugins/launchNavigator/
+https://developers.google.com/maps/documentation/android-api/intents
+https://stackoverflow.com/questions/35130846/google-maps-api-for-gps-like-navigation
+https://www.google.co.id/search?q=onchangelocation+in+google+maps+api&oq=onchangelocation+in+google+maps+api&aqs=chrome..69i57.36431j0j7&sourceid=chrome&ie=UTF-8
+dokumentasi Google Maps Roads API
